@@ -11,6 +11,12 @@ wdExportFormatPDF = 17
 
 data_file = work_folder + "Data.xlsx"
 template_file = work_folder + "Template.docx"
+if not os.path.isfile(data_file):
+    print("There is no file Data.xlsx")
+    exit()
+if not os.path.isfile(template_file):
+    print("There is no file Template.docx")
+    exit()
 
 df = pd.read_excel(data_file, engine='openpyxl')
 df.columns = [col_name.upper() for col_name in df.columns]
@@ -46,6 +52,9 @@ for idx in tqdm(df.index):
         _oWord.ActiveDocument.PrintOut()
     else:
         pdf_file_name = df_fnames[df_fnames.index==idx].values[0][0]
+        for one_char in ',.!~<>?/\|*+-&^%$#@"':
+            pdf_file_name = pdf_file_name.replace(one_char, "")
+            
         pdf_file_name = work_folder + f"{(idx+1):03}. {pdf_file_name}.pdf"
         _oWord.ActiveDocument.ExportAsFixedFormat(OutputFileName:=pdf_file_name, ExportFormat:=wdExportFormatPDF)
     
