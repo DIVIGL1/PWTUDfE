@@ -4,6 +4,16 @@ import os
 import sys
 from tqdm import tqdm
 
+print("-------------------------------------------------------------")
+print("PWTUDfE: version 2.3")
+print("It helps you to Print Word Template Using Data from Excel.")
+print("")
+print("Use key -p to ptint testp to default printer.")
+print("-------------------------------------------------------------")
+print("")
+print("")
+print("Progress:")
+
 work_folder = os.getcwd() + "/"
 wdReplaceAll = 2
 wdFindContinue = 1
